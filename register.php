@@ -105,9 +105,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         
         // Prepare an insert statement
         // sql statement για τα δεδομενα
-        $sql = "INSERT INTO users (password, email, name, surname) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO users (name, surname, email, password) VALUES (?, ?, ?, ?)";
         if($stmt = mysqli_prepare($link, $sql)){
-            mysqli_stmt_bind_param($stmt, "ssss", $param_password, $param_email, $param_name, $param_surname);
+            mysqli_stmt_bind_param($stmt, "ssss", $param_name, $param_surname, $param_email, $param_password );
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             $param_email = $email;
             $param_name = $name;
@@ -125,7 +125,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
          
         // Close statement
         // κλεισιμο
-        // mysqli_stmt_close($stmt);
+         mysqli_stmt_close($stmt);
     }
     
     // Close connection
@@ -160,19 +160,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
                                     <div class="card-body">
-                                        <form>
+                                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
                                                         <label class="small mb-1" for="inputFirstName">First Name</label>
-                                                        <input class="form-control py-4" id="inputFirstName" type="text" value="<?php echo $name; ?>" name="name" placeholder="Enter first name" />
+                                                        <input class="form-control py-4" id="inputFirstName" type="text" name="name" value="<?php echo $name; ?>" placeholder="Enter first name" />
                                                         <span class="help-block"><?php echo $name_err; ?></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group <?php echo (!empty($surname_err)) ? 'has-error' : ''; ?>">
                                                         <label class="small mb-1" for="inputLastName">Last Name</label>
-                                                        <input class="form-control py-4" name="surname" id="inputLastName" value="<?php echo $surname; ?>" type="text" placeholder="Enter last name" />
+                                                        <input class="form-control py-4" id="inputLastName" value="<?php echo $surname; ?>" type="text" name="surname" placeholder="Enter last name" />
                                                         <span class="help-block"><?php echo $surname_err; ?></span>
                                                     </div>
                                                 </div>
