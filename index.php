@@ -61,7 +61,10 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        User
+                        User:
+                        <?php
+                            echo $_SESSION["email"]
+                        ?>
                     </div>
                 </nav>
             </div>
@@ -69,10 +72,19 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                 <main>
                     <div class="container-fluid">
                         <h1 class="mt-4">Dashboard</h1>
+                        <a href="add_project.php">Add a project</a>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active">
+                                <br>
+                                 project name
+                                 <br>
+                                 status: development, release, stable, obsolete
+                                 <br>
+                                 Who can interact with the project
+                                 <br>
+                                 description
+                            </li>
                         </ol>
-                       
                         </div>
                     </div>
                 </main>
