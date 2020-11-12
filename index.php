@@ -48,14 +48,19 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
                             <a class="nav-link" href="index.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
+                                User Projects:
                             </a>
-                            <div class="sb-sidenav-menu-heading">Interface</div>
+                            <ul>
+                                <li> <a href="add_project.php">Add a project</a> </li>
+                                <li>project 1</li>
+                                <li>project 2</li>
+                                <li>project 3</li>
+                                <li>project 4</li>
+                            </ul>
+
                             
-                            <div class="sb-sidenav-menu-heading">Addons</div>
                         
                         </div>
                     </div>
@@ -72,7 +77,6 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                 <main>
                     <div class="container-fluid">
                         <h1 class="mt-4">Dashboard</h1>
-                        <a href="add_project.php">Add a project</a>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">
                                 <br>
