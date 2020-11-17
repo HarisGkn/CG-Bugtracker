@@ -143,25 +143,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Project</h3></div>
                                     <div class="card-body">
                                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                                            <div class="form-row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group <?php echo (!empty($project_name_err)) ? 'has-error' : ''; ?>">
-                                                        <label class="small mb-1" for="inputProjectName">Project Name</label>
-                                                        <input class="form-control py-4" id="inputProjectName" type="text" name="project_name" value="<?php echo $project_name; ?>" placeholder="Enter project name" />
-                                                        <span class="help-block"><?php echo $project_name_err; ?></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group <?php echo (!empty($status_err)) ? 'has-error' : ''; ?>">
-                                                        <label class="small mb-1" for="inputStatus">Status</label>
-                                                        <input class="form-control py-4" id="inputStatus" value="<?php echo $status; ?>" type="text" name="status" placeholder="Enter status" />
-                                                        <span class="help-block"><?php echo $status_err; ?></span>
-                                                    </div>
-                                                </div>
+                                            <div class="form-group <?php echo (!empty($project_name_err)) ? 'has-error' : ''; ?>">
+                                                <label class="small mb-1" for="inputProjectName">Project Name</label>
+                                                <input class="form-control py-4" id="inputProjectName" type="text" name="project_name" value="<?php echo $project_name; ?>" placeholder="Enter project name" />
+                                                <span class="help-block"><?php echo $project_name_err; ?></span>
+                                            </div>
+                                            <div class="form-group <?php echo (!empty($status_err)) ? 'has-error' : ''; ?>">
+                                                <label class="small mb-1" for="inputStatus">Status</label>
+                                                <select class="form-control" id="inputStatus" name="status"  value="<?php echo $status; ?>" >
+                                                    <option value="development">Development</option>
+                                                    <option value="release">Release</option>
+                                                    <option value="stable">Stable</option>
+                                                    <option value="obsolete">Obsolete</option>
+                                                </select>
+                                                <span class="help-block"><?php echo $status_err; ?></span>
                                             </div>
                                             <div class="form-group <?php echo (!empty($authorized_users_err)) ? 'has-error' : ''; ?>">
-                                                    <label class="small mb-1" for="inputAuthorized_usersAddress">Authorized Users</label>
-                                                    <input class="form-control py-4" name="authorized_users" id="inputAuthorized_usersAddress" value="<?php echo $authorized_users; ?>" type="text" placeholder="Enter the users that are authorized separated by a comma" />
+                                                    <label class="small mb-1" for="inputAuthorized_users">Authorized Users</label>
+                                                    <select class="form-control" id="inputAuthorized_users" name="authorized_users"  value="<?php echo $authorized_users; ?>" >
+                                                    <?php
+                                                        $sql = "SELECT name FROM users";
+                                                        $result = $link->query($sql);
+                                                        if ($result->num_rows > 0) {
+                                                            while($row = $result->fetch_assoc()) {
+                                                                $name = $row["name"];
+                                                    ?>
+                                                                <option value="<?php echo $name.''; ?>"><?php echo $name.''; ?></option>
+                                                    <?php
+                                                            }
+                                                        } 
+                                                    ?>
+                                                </select>
                                                     <span class="help-block"><?php echo $authorized_users_err; ?></span>
                                             </div>
                                             <div class="form-group">
