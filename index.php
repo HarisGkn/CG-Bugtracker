@@ -54,10 +54,7 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                             </a>
                             <ul>
                                 <li> <a href="add_project.php">Add a project</a> </li>
-                                <li>project 1</li>
-                                <li>project 2</li>
-                                <li>project 3</li>
-                                <li>project 4</li>
+                                <li><a href="list_projects.php">List projects</a></li>
                             </ul>
 
                             
