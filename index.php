@@ -76,14 +76,45 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                         <h1 class="mt-4">Dashboard</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">
-                                <br>
-                                 project name
-                                 <br>
-                                 status: development, release, stable, obsolete
-                                 <br>
-                                 Who can interact with the project
-                                 <br>
-                                 description
+                            <table class="table">
+
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">id</th>
+                                                <th scope="col">project name</th>
+                                                <th scope="col">status</th>
+                                                <th scope="col">authorized_users</th>
+                                                <th scope="col">description</th>
+                                            </tr>
+                                        </thead>
+                                    
+                            <?php
+                            require_once "config.php";
+                            // takes the id, username and email from all users and displays it
+                                $sql = "SELECT id, project_name, status, authorized_users, description FROM projects";
+                                $result = $link->query($sql);
+                                if ($result->num_rows > 0) {
+                                  while($row = $result->fetch_assoc()) {
+                                    $id = $row["id"];
+                                    $project_name = $row["project_name"];
+                                    $authorized_users = $row["authorized_users"];
+                                    $status = $row["status"];
+                                    $description = $row["description"];
+                            ?>
+                                    <tbody>
+                                      <th><?php echo $id; ?></th>
+                                      <td><?php echo $project_name; ?></td>
+                                      <td><?php echo $status; ?></td>
+                                      <td><?php echo $authorized_users; ?></td>
+                                      <td><?php echo $description; ?></td>
+                                      <td><a onclick="location.href='update_project.php?ProjId=<?php echo $project_name?>'" class="btn btn-primary">update</a></td>
+                                    </tbody>
+                            <?php
+                                  }
+                              } 
+                            ?>
+                            
+                            </table>
                             </li>
                         </ol>
                         </div>
