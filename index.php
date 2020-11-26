@@ -108,6 +108,7 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                                       <td><?php echo $authorized_users; ?></td>
                                       <td><?php echo $description; ?></td>
                                       <td><a onclick="location.href='update_project.php?pid=<?php echo $id?>'" class="btn btn-primary">update</a></td>
+                                      <td><a onclick="location.href='delete_project.php?del=<?php echo $id?>'" class="btn btn-primary">delete</a></td>
                                     </tbody>
                             <?php
                                   }

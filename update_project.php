@@ -1,73 +1,24 @@
 <?php
 session_start();
-error_reporting(E_ALL ^ E_NOTICE);
 // Include config file
 require_once "config.php";
-$x = (int) $_GET['pid'];
-echo $x;
-// Define variables and initialize with empty values
-// αρχικοποιηση μεταβλητων 
-$status = $authorized_users = "";
-$status_err = $authorized_users_err = "";
-// Processing form data when form is submitted
-// επεξεργασια δεδομενων φορμας
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    //status
-    if(empty(trim($_POST["status"]))){
-        $status_err = "What is the status of your project.";
-    } else{
-        $sql = "SELECT id FROM projects WHERE status = ?";     
-        if($stmt = mysqli_prepare($link, $sql)){
-            mysqli_stmt_bind_param($stmt, "s", $param_status);
-            $param_status = trim($_POST["status"]);            
-            $status = trim($_POST["status"]);
-        }
-        mysqli_stmt_close($stmt);
-    }
+	// initialize variables
+	$project_name = "";
+    $status = "";
+    $authorized_users = "";
+    $description = "";
+    $id = $_GET['pid'];
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $id = $_POST['id'];
+		$project_name = $_POST['project_name'];
+        $status = $_POST['status'];
+        $authorized_users = $_POST['authorized_users'];
+        $description = $_POST['description'];
 
-
-    //authorized users
-    if(empty(trim($_POST["authorized_users"]))){
-        $authorized_users_err = "enter the names of all the authorized users.";
-    } else{
-        $sql = "SELECT id FROM projects WHERE authorized_users = ?";     
-        if($stmt = mysqli_prepare($link, $sql)){
-            mysqli_stmt_bind_param($stmt, "s", $param_authorized_users);
-            $param_authorized_users = trim($_POST["authorized_users"]);            
-            $authorized_users = trim($_POST["authorized_users"]);
-        }
-        mysqli_stmt_close($stmt);
-    }
-    
-    // Check input errors before inserting in database
-    // ελεγχος για την υπαρξη errors
-    if(empty($status_err) && empty($authorized_users_err)){ 
-        // Prepare an insert statement
-        // sql statement για τα δεδομενα
-        $sql = "UPDATE projects SET status=?, authorized_users=?  WHERE id = $x";
-        if($stmt = mysqli_prepare($link, $sql)){
-            mysqli_stmt_bind_param($stmt, "ss", $param_status, $param_authorized_users );
-            $param_status = $status;
-            $param_authorized_users = $authorized_users;
-            // Attempt to execute the prepared statement
-            // προσπαθεια εκτελεσης του statement
-            if(mysqli_stmt_execute($stmt)){
-                // Redirect to index page 
-                header("location: index.php");
-            } else{
-                echo "Something went wrong. Please try again later.";
-            }
-        }
-         
-        // Close statement
-        // κλεισιμο
-        //  mysqli_stmt_close($stmt);
-    }
-    
-    // Close connection
-    // κλεισιμο
-    // mysqli_close($link);
-}
+		mysqli_query($link, "UPDATE projects SET status='$status', authorized_users='$authorized_users', description='$description' WHERE id=$id"); 
+		$_SESSION['message'] = "Address saved"; 
+		header('location: index.php');
+	}
 ?>
 
 
@@ -93,20 +44,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Project</h3></div>
                                     <div class="card-body">
-                                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                                            <div class="form-group <?php echo (!empty($status_err)) ? 'has-error' : ''; ?>">
-                                                <label class="small mb-1" for="inputStatus">Status</label>
-                                                <select class="form-control" id="inputStatus" name="status"  value="<?php echo $status; ?>" >
+                                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+	                                    	<div class="form-group">
+                                                <label class="small mb-1">Status</label>
+                                                <select class="form-control" name="status"  value="" >
                                                     <option value="development">Development</option>
                                                     <option value="release">Release</option>
                                                     <option value="stable">Stable</option>
                                                     <option value="obsolete">Obsolete</option>
                                                 </select>
-                                                <span class="help-block"><?php echo $status_err; ?></span>
-                                            </div>
-                                            <div class="form-group <?php echo (!empty($authorized_users_err)) ? 'has-error' : ''; ?>">
-                                                    <label class="small mb-1" for="inputAuthorized_users">Authorized Users</label>
-                                                    <select class="form-control" id="inputAuthorized_users" name="authorized_users"  value="<?php echo $authorized_users; ?>" >
+	                                    	</div>
+                                            <div class="form-group">
+                                                <label class="small mb-1">Authorized Users</label>
+                                                <select class="form-control" name="authorized_users"  value="" >
                                                     <?php
                                                         $sql = "SELECT name FROM users";
                                                         $result = $link->query($sql);
@@ -120,12 +71,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                                         } 
                                                     ?>
                                                 </select>
-                                                    <span class="help-block"><?php echo $authorized_users_err; ?></span>
-                                            </div>
-                                            <div class="form-group mt-4 mb-0">
-                                                <input type="submit" value="Create Project" class="btn btn-primary btn-block">
-                                            </div>
-                                        </form>
+	                                    	</div>
+                                            <div class="form-group">
+                                                <label class="small mb-1">description</label>
+	                                    		<input class="form-control py-4" type="text" name="description" placeholder="Describe your project" value="">
+	                                    	</div>
+	                                    	<div class="form-group mt-4 mb-0">
+	                                    		<button class="btn btn-primary btn-block" type="submit" name="save" >Save</button>
+	                                    	</div>
+	                                    </form>
                                     </div>
                                 </div>
                             </div>
