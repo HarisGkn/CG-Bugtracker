@@ -107,20 +107,23 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                                       <td><?php echo $status; ?></td>
                                       <td><?php echo $authorized_users; ?></td>
                                       <td><?php echo $description; ?></td>
-                                      <td><a onclick="location.href='update_project.php?pid=<?php echo $id?>'" class="btn btn-primary">update</a></td>
-                                      <td><a onclick="location.href='delete_project.php?del=<?php echo $id?>'" class="btn btn-primary">delete</a></td>
+                                      <td><a onclick="location.href='update_project.php?pid=<?php echo $id?>'" class="btn btn-primary">Edit</a></td>
+                                      <td><a onclick="location.href='delete_project.php?del=<?php echo $id?>'" class="btn btn-danger">Delete</a></td>
+                                      <td><a onclick="location.href='list_tickets.php?inf=<?php echo $id?>'" class="btn btn-info">list Tickets</a></td>
                                     </tbody>
                             <?php
                                   }
                               } 
                             ?>
-                            
                             </table>
                             </li>
                         </ol>
                         </div>
                     </div>
+                </div>
+                
                 </main>
+
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
