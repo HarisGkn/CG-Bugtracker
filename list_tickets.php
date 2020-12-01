@@ -1,8 +1,6 @@
 <?php
 session_start();
 // Include config file
-require_once "config.php";
-
 ?>
 
 
@@ -29,22 +27,44 @@ require_once "config.php";
 
                                         <thead>
                                             <tr>
-                                                <th scope="col">id</th>
-                                                <th scope="col">project name</th>
-                                                <th scope="col">status</th>
-                                                <th scope="col">authorized_users</th>
-                                                <th scope="col">description</th>
+                                                <th scope="col">Ticket Id</th>
+                                                <th scope="col">Summary</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">To User</th>
+                                                <th scope="col">Priority</th>
+                                                <th scope="col">Description</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                        <th>test</th>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        </tbody>
+                                        <?php
+                                                require_once "config.php";
+                                                $projId = $_GET['inf'];
+                                                $sql = "SELECT id, summary, status, to_user, priority, description FROM tickets WHERE proj_id=$projId";
+                                                $result = $link->query($sql);
+                                                if ($result->num_rows > 0) {
+                                                  while($row = $result->fetch_assoc()) {
+                                                    $id = $row["id"];
+                                                    $summary = $row["summary"];
+                                                    $status = $row["status"];
+                                                    $to_user = $row["to_user"];
+                                                    $priority = $row["priority"];
+                                                    $description = $row["description"];
+                                            ?>
+                                                    <tbody>
+                                                      <th><?php echo $id; ?></th>
+                                                      <th><?php echo $summary; ?></th>
+                                                      <td><?php echo $status; ?></td>
+                                                      <td><?php echo $to_user; ?></td>
+                                                      <td><?php echo $priority; ?></td>
+                                                      <td><?php echo $description; ?></td>
+                                                      <td><a onclick="location.href='update_ticket.php?ticketId=<?php echo $id?>'" class="btn btn-primary">Edit</a></td>
+                                                      <td><a onclick="location.href='delete_ticket.php?del=<?php echo $id?>'" class="btn btn-danger">Delete</a></td>
+                                                    </tbody>
+                                            <?php
+                                                  }
+                                              } 
+                                            ?>
                                     </table>
-                                    <a class="btn btn-primary">Submit a new ticket</a>
+                                    <a class="btn btn-primary" href="submit_ticket.php?inf=<?php echo $projId ?>">Submit a new ticket</a>
                         </div>
                     </div>
                 </main>
