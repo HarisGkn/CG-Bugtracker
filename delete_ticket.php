@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    this is delete_ticket
-</body>
-</html>
+<?php
+session_start();
+// Include config file
+require_once "config.php";
+if (isset($_GET['del'])) {
+	$id = $_GET['del'];
+	mysqli_query($link, "DELETE FROM tickets WHERE id=$id");
+	header('location: index.php');
+}
+?>

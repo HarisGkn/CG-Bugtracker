@@ -3,14 +3,12 @@ session_start();
 // Include config file
 require_once "config.php";
 	// initialize variables
-	$project_name = "";
     $status = "";
     $authorized_users = "";
     $description = "";
     $id = $_GET['pid'];
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = $_POST['id'];
-		$project_name = $_POST['project_name'];
         $status = $_POST['status'];
         $authorized_users = $_POST['authorized_users'];
         $description = $_POST['description'];
