@@ -54,7 +54,6 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                             </a>
                             <ul>
                                 <li> <a href="add_project.php">Add a project</a> </li>
-                                <li><a href="list_projects.php">List projects</a></li>
                             </ul>
 
                             
@@ -63,9 +62,24 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        User:
+                        Username:
                         <?php
-                            echo $_SESSION["email"]
+                            require_once "config.php";
+                            $id = $_SESSION["id"];
+                            $sql = "SELECT name, surname FROM users WHERE id=$id";
+                            $result = $link->query($sql);
+                            if ($result->num_rows > 0){
+                                while($row = $result->fetch_assoc()){
+                                    $name = $row["name"];
+                                    $surname = $row["surname"];
+                                }
+                            }
+                            echo $name, " ", $surname;
+                        ?>
+                        <br>
+                        Email:
+                        <?php
+                            echo $_SESSION["email"];
                         ?>
                     </div>
                 </nav>
@@ -116,7 +130,6 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                               } 
                             ?>
                             </table>
-                            </li>
                         </ol>
                         </div>
                     </div>
