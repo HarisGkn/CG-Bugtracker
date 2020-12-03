@@ -1,3 +1,63 @@
+<?php
+session_start();
+// Include config file
+require_once "config.php";
+$email = "";
+$email_err = "";
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+     
+    if(empty(trim($_POST["email"]))){
+        $email_err = "Please enter email.";
+    } else{
+        $email = trim($_POST["email"]);
+    }
+    if(empty($email_err)){
+        $sql = "SELECT email FROM users WHERE email=?";
+        if($stmt = mysqli_prepare($link, $sql)){
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
+            $param_email = $email;
+            if(mysqli_stmt_execute($stmt)){
+                mysqli_stmt_store_result($stmt);
+                if(mysqli_stmt_num_rows($stmt) == 1){                    
+                    mysqli_stmt_bind_result($stmt, $email);
+                    if(mysqli_stmt_fetch($stmt)){
+                        $email_rec = $email;
+                    }
+                } else{
+                    // Display an error message if username doesn't exist
+                    // το username δεν υπαρχει
+                    $email_err = "No account found with that email.";
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
+        $token = bin2hex(random_bytes(50));
+        $sql = "INSERT INTO password_resets (email, token) VALUES (?, ?)";
+        if($stmt = mysqli_prepare($link, $sql)){
+            mysqli_stmt_bind_param($stmt, "ss", $param_email, $param_token );
+            $param_email = $email_rec;
+            $param_token = $token;
+            // Attempt to execute the prepared statement
+            // προσπαθεια εκτελεσης του statement
+            if(mysqli_stmt_execute($stmt)){
+                $to = $email_rec;
+                $subject = "Reset your password on CG-Bugtracker.com";
+                $msg = "Hi there, click on this <a href=\"new_password.php?token=" . $token . "\">link</a> to reset your password on our site";
+                $msg = wordwrap($msg,70);
+                $headers = "From: info@CG-Bugtracker.com";
+                mail($to, $subject, $msg, $headers);
+                header('location: pending.php?email=' . $email_rec);
+            } else{
+                echo "Something went wrong. Please try again later.";
+            }
+        }
+         
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -21,14 +81,14 @@
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Password Recovery</h3></div>
                                     <div class="card-body">
                                         <div class="small mb-3 text-muted">Enter your email address and we will send you a link to reset your password.</div>
-                                        <form>
-                                            <div class="form-group">
+                                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                                            <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                                                 <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                                <input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" />
+                                                <input class="form-control py-4" id="inputEmailAddress" name="email" type="email" placeholder="Enter email address" />
+                                                <span class="help-block"><?php echo $email_err; ?></span>
                                             </div>
-                                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="login.php">Return to login</a>
-                                                <a class="btn btn-primary" href="login.php">Reset Password</a>
+                                            <div class="form-group mt-4 mb-0">
+                                                <input type="submit" name="reset-password" class="btn btn-primary btn-block">
                                             </div>
                                         </form>
                                     </div>
