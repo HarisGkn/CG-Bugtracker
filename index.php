@@ -58,10 +58,10 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                         <br>
                         <br>
                         <h1 class="mt-4">Dashboard</h1>
+                        <a href="add_project.php" class="btn btn-primary">Add a Project</a>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">
                             <table class="table">
-
                                         <thead>
                                             <tr>
                                                 <th scope="col">id</th>
