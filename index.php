@@ -57,8 +57,10 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                     <div class="container-fluid">
                         <br>
                         <br>
+                        <?php
+                        if($_SESSION["id"] == "1"){
+                        ?>
                         <h1 class="mt-4">Dashboard</h1>
-                        <a href="add_project.php" class="btn btn-primary">Add a Project</a>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">
                             <table class="table">
@@ -101,6 +103,56 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                             ?>
                             </table>
                         </ol>
+                        <a href="add_project.php" class="btn btn-primary">Add a Project</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <h1 class="mt-4">Dashboard</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">
+                            <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">id</th>
+                                                <th scope="col">project name</th>
+                                                <th scope="col">status</th>
+                                                <th scope="col">authorized_users</th>
+                                                <th scope="col">description</th>
+                                            </tr>
+                                        </thead>
+                                    
+                            <?php
+                            require_once "config.php";
+                            // takes the id, username and email from all users and displays it
+                                $user=$_SESSION["name"];
+                                $sql = "SELECT id, project_name, status, authorized_users, description FROM projects WHERE authorized_users='$user'";
+                                $result = $link->query($sql);
+                                if ($result->num_rows > 0) {
+                                  while($row = $result->fetch_assoc()) {
+                                    $id = $row["id"];
+                                    $project_name = $row["project_name"];
+                                    $authorized_users = $row["authorized_users"];
+                                    $status = $row["status"];
+                                    $description = $row["description"];
+                            ?>
+                                    <tbody>
+                                      <th><?php echo $id; ?></th>
+                                      <td><?php echo $project_name; ?></td>
+                                      <td><?php echo $status; ?></td>
+                                      <td><?php echo $authorized_users; ?></td>
+                                      <td><?php echo $description; ?></td>
+                                      <td><a onclick="location.href='list_tickets.php?inf=<?php echo $id?>'" class="btn btn-info">list Tickets</a></td>
+                                    </tbody>
+                            <?php
+                                  }
+                              } 
+                            ?>
+                            </table>
+                        </ol>
+                            <?php
+                        }
+                        ?>
                         </div>
                     </div>
                 </div>
