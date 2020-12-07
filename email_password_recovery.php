@@ -43,10 +43,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(mysqli_stmt_execute($stmt)){
                 $to = $email_rec;
                 $subject = "Reset your password on CG-Bugtracker.com";
-                $msg = "Hi there, click on this <a href=\"/opt/lampp/htdocs/CG-Bugtracker/email_password_recovery.php/password.php?token=" . $token . "\">link</a> to reset your password on our site";
-                $msg = wordwrap($msg,70);
-                $headers = "From: info@CG-Bugtracker.com";
-                mail($to, $subject, $msg, $headers);
+                $message = "Hi there, click on this <a href=\"/opt/lampp/htdocs/CG-Bugtracker/email_password_recovery.php/password.php?token=" . $token . "\">link</a> to reset your password on our site";
+                $message = wordwrap($message,70);
+                mail($to, $subject, $message);
                 header('location: pending.php?email=' . $email_rec);
             } else{
                 echo "Something went wrong. Please try again later.";
