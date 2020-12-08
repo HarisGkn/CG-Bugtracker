@@ -2,6 +2,11 @@
 session_start();
 // Include config file
 require_once "config.php";
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require '/opt/lampp/htdocs/CG-Bugtracker/vendor/phpmailer/phpmailer/src/Exception.php';
+require '/opt/lampp/htdocs/CG-Bugtracker/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require '/opt/lampp/htdocs/CG-Bugtracker/vendor/phpmailer/phpmailer/src/SMTP.php';
 $email = "";
 $email_err = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -41,12 +46,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             // προσπαθεια εκτελεσης του statement
             if(mysqli_stmt_execute($stmt)){
-                $to = $email_rec;
-                $subject = "Reset your password on CG-Bugtracker.com";
-                $message = "Hi there, click on this <a href=\"/opt/lampp/htdocs/CG-Bugtracker/email_password_recovery.php/password.php?token=" . $token . "\">link</a> to reset your password on our site";
-                $message = wordwrap($message,70);
-                mail($to, $subject, $message);
-                header('location: pending.php?email=' . $email_rec);
+                // $to = $email_rec;
+                // $subject = "Reset your password on CG-Bugtracker.com";
+                // $message = "Hi there, click on this <a href=\"/opt/lampp/htdocs/CG-Bugtracker/email_password_recovery.php/password.php?token=" . $token . "\">link</a> to reset your password on our site";
+                // $message = wordwrap($message,70);
+                // mail($to, $subject, $message);
+                // header('location: pending.php?email=' . $email_rec);
+                $mail = new PHPMailer();
+                $mail->IsSMTP();
+                $mail->Mailer = "smtp";
+                $mail->SMTPDebug  = 0;  
+                $mail->SMTPAuth   = TRUE;
+                $mail->SMTPSecure = "tls";
+                $mail->Port       = 587;
+                $mail->Host       = "smtp.gmail.com";
+                $mail->Username   = "bugtracker.cg@gmail.com";
+                $mail->Password   = "6940169854Xaris";
+                $mail->IsHTML(true);
+                $mail->AddAddress($email_rec,);
+                $mail->SetFrom("bugtracker.cg@gmail.com", "CG-Bugtracker");
+                $mail->AddReplyTo("bugtracker.cg@gmail.com", "CG-Bugtracker");
+                // $mail->AddCC("cc-recipient-email@domain", "cc-recipient-name");
+                $mail->Subject = "Test is Test Email sent via Gmail SMTP Server using PHP Mailer";
+                $content = "http://192.168.0.183/CG-Bugtracker/password.php?token=". $token;
+                $mail->MsgHTML($content); 
+                if(!$mail->Send()) {
+                  echo "Error while sending Email.";
+                  var_dump($mail);
+                } else {
+                    header('location: pending.php?email=' . $email_rec);
+                    echo "Email sent successfully";
+                }
             } else{
                 echo "Something went wrong. Please try again later.";
             }
