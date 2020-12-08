@@ -60,8 +60,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $mail->SMTPSecure = "tls";
                 $mail->Port       = 587;
                 $mail->Host       = "smtp.gmail.com";
-                $mail->Username   = "bugtracker.cg@gmail.com";
-                $mail->Password   = "6940169854Xaris";
+                $mail->Username   = "";
+                $mail->Password   = "";
                 $mail->IsHTML(true);
                 $mail->AddAddress($email_rec,);
                 $mail->SetFrom("bugtracker.cg@gmail.com", "CG-Bugtracker");
