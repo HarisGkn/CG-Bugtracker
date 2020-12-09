@@ -67,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $mail->SetFrom("bugtracker.cg@gmail.com", "CG-Bugtracker");
                 $mail->AddReplyTo("bugtracker.cg@gmail.com", "CG-Bugtracker");
                 // $mail->AddCC("cc-recipient-email@domain", "cc-recipient-name");
-                $mail->Subject = "Test is Test Email sent via Gmail SMTP Server using PHP Mailer";
+                $mail->Subject = "Recover your password";
                 $content = "http://192.168.0.183/CG-Bugtracker/password.php?token=". $token;
                 $mail->MsgHTML($content); 
                 if(!$mail->Send()) {
@@ -75,7 +75,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                   var_dump($mail);
                 } else {
                     header('location: pending.php?email=' . $email_rec);
-                    echo "Email sent successfully";
                 }
             } else{
                 echo "Something went wrong. Please try again later.";
