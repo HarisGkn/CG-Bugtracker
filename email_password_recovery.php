@@ -66,7 +66,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $mail->AddAddress($email_rec,);
                 $mail->SetFrom("bugtracker.cg@gmail.com", "CG-Bugtracker");
                 $mail->AddReplyTo("bugtracker.cg@gmail.com", "CG-Bugtracker");
-                // $mail->AddCC("cc-recipient-email@domain", "cc-recipient-name");
                 $mail->Subject = "Recover your password";
                 $content = "http://192.168.0.183/CG-Bugtracker/password.php?token=". $token;
                 $mail->MsgHTML($content); 
