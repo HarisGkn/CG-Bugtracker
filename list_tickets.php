@@ -56,8 +56,14 @@ session_start();
                                                       <td><?php echo $to_user; ?></td>
                                                       <td><?php echo $priority; ?></td>
                                                       <td><?php echo $description; ?></td>
+                                                      <?php
+                                                        if($_SESSION["id"] == "1"){
+                                                      ?>
                                                       <td><a onclick="location.href='update_ticket.php?ticketId=<?php echo $id?>'" class="btn btn-primary">Edit</a></td>
                                                       <td><a onclick="location.href='delete_ticket.php?del=<?php echo $id?>'" class="btn btn-danger">Delete</a></td>
+                                                      <?php
+                                                        }
+                                                      ?>
                                                     </tbody>
                                             <?php
                                                   }

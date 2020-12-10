@@ -1,5 +1,8 @@
 <?php
     require_once "config.php";
+    if($_SESSION["id"] != "1"){ 
+        header("Location: index.php");
+    }
     // initialize variables
     $projId = $_GET['inf'];
 	$summary = "";
