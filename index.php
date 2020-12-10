@@ -125,7 +125,7 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                             <?php
                             require_once "config.php";
                             // takes the id, username and email from all users and displays it
-                                $user=$_SESSION["name"];
+                                $user=$_SESSION["email"];
                                 $sql = "SELECT id, project_name, status, authorized_users, description FROM projects WHERE authorized_users='$user'";
                                 $result = $link->query($sql);
                                 if ($result->num_rows > 0) {

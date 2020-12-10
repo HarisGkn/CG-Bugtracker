@@ -60,8 +60,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $mail->SMTPSecure = "tls";
                 $mail->Port       = 587;
                 $mail->Host       = "smtp.gmail.com";
-                $mail->Username   = "";
-                $mail->Password   = "";
+                $mail->Username   = "username";
+                $mail->Password   = "password";
                 $mail->IsHTML(true);
                 $mail->AddAddress($email_rec,);
                 $mail->SetFrom("bugtracker.cg@gmail.com", "CG-Bugtracker");
@@ -148,3 +148,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <script src="js/scripts.js"></script>
     </body>
 </html>
+

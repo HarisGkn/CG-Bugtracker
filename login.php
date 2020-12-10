@@ -65,7 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["email"] = $email;
-                            $_SESSION["name"] = $name;                            
+                            // $_SESSION["name"] = $name;                            
                             
                             // Redirect user to index page
                             // στελνει τον χρηστη στην αρχικη

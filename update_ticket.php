@@ -63,13 +63,13 @@ require_once "config.php";
                                                 <label class="small mb-1">To User</label>
                                                 <select class="form-control" name="to_user"  value="" >
                                                     <?php
-                                                        $sql = "SELECT name FROM users";
+                                                        $sql = "SELECT email FROM users";
                                                         $result = $link->query($sql);
                                                         if ($result->num_rows > 0) {
                                                             while($row = $result->fetch_assoc()) {
-                                                                $name = $row["name"];
+                                                                $email = $row["email"];
                                                     ?>
-                                                                <option value="<?php echo $name.''; ?>"><?php echo $name.''; ?></option>
+                                                                <option value="<?php echo $email.''; ?>"><?php echo $email.''; ?></option>
                                                     <?php
                                                             }
                                                         } 

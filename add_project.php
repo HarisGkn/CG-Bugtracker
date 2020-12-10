@@ -64,13 +64,13 @@ if($_SESSION["id"] != "1"){
                                                 <label class="small mb-1">Authorized Users</label>
                                                 <select class="form-control" name="authorized_users"  value="" >
                                                     <?php
-                                                        $sql = "SELECT name FROM users";
+                                                        $sql = "SELECT email FROM users";
                                                         $result = $link->query($sql);
                                                         if ($result->num_rows > 0) {
                                                             while($row = $result->fetch_assoc()) {
-                                                                $name = $row["name"];
+                                                                $email = $row["email"];
                                                     ?>
-                                                                <option value="<?php echo $name.''; ?>"><?php echo $name.''; ?></option>
+                                                                <option value="<?php echo $email.''; ?>"><?php echo $email.''; ?></option>
                                                     <?php
                                                             }
                                                         } 
