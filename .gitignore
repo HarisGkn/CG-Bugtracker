@@ -1,6 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/composer
 # Edit at https://www.toptal.com/developers/gitignore?templates=composer
 
+email_password_recovery.php
 ### Composer ###
 composer.phar
 /vendor/
