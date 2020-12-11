@@ -9,6 +9,13 @@ if($_SESSION["id"] != "1"){
     $status = "";
     $authorized_users = "";
     $description = "";
+
+    $checkbox1=$_POST['techno'];  
+        $chk=""; 
+        foreach($checkbox1 as $chk1)  
+        {  
+           $chk .= $chk1.",";  
+        } 
     $id = $_GET['pid'];
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = $_POST['id'];
@@ -16,7 +23,7 @@ if($_SESSION["id"] != "1"){
         $authorized_users = $_POST['authorized_users'];
         $description = $_POST['description'];
 
-		mysqli_query($link, "UPDATE projects SET status='$status', authorized_users='$authorized_users', description='$description' WHERE id=$id"); 
+		mysqli_query($link, "UPDATE projects SET status='$status', authorized_users='$chk', description='$description' WHERE id=$id"); 
 		$_SESSION['message'] = "Address saved"; 
 		header('location: index.php');
 	}
@@ -58,7 +65,6 @@ if($_SESSION["id"] != "1"){
 	                                    	</div>
                                             <div class="form-group">
                                                 <label class="small mb-1">Authorized Users</label>
-                                                <select class="form-control" name="authorized_users"  value="" >
                                                     <?php
                                                         $sql = "SELECT email FROM users";
                                                         $result = $link->query($sql);
@@ -66,12 +72,12 @@ if($_SESSION["id"] != "1"){
                                                             while($row = $result->fetch_assoc()) {
                                                                 $email = $row["email"];
                                                     ?>
-                                                                <option value="<?php echo $email.''; ?>"><?php echo $email.''; ?></option>
+                                                    <br>
+                                                                <input type="checkbox" name="techno[]" value="<?php echo $email.''; ?>"><?php echo $email.''; ?></input>
                                                     <?php
                                                             }
                                                         } 
                                                     ?>
-                                                </select>
 	                                    	</div>
                                             <div class="form-group">
                                                 <label class="small mb-1">description</label>
