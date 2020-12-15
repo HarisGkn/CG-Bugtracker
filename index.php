@@ -43,7 +43,7 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                                 }
                             }
                             echo $name, " ", $surname;
-                            ?>
+                            ?> 
                             <br>
                             <?php
                             echo $_SESSION["email"];

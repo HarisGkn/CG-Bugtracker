@@ -3,7 +3,7 @@ session_start();
 // Include config file
 require_once "config.php"; 
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
     <head>
         <meta charset="utf-8" />
