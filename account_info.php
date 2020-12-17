@@ -2,7 +2,44 @@
 session_start();
 // Include config file
 require_once "config.php"; 
+ 
+$password = $confirm_password = "";
+$password_err = $confirm_password_err = "";
+
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+
+    if(empty(trim($_POST["password"]))){
+        $password_err = "Please enter a password.";     
+    } elseif(strlen(trim($_POST["password"])) < 6){
+        $password_err = "Password must have atleast 6 characters.";
+    } else{
+        $password = trim($_POST["password"]);
+    }
+    
+    // Validate confirm password
+    // ελεγχος εγκυροτητας για το confirm password
+    if(empty(trim($_POST["confirm_password"]))){
+        $confirm_password_err = "Please confirm password.";     
+    } else{
+        $confirm_password = trim($_POST["confirm_password"]);
+        if(empty($password_err) && ($password != $confirm_password)){
+            $confirm_password_err = "Password did not match.";
+        }
+    }
+    
+
+    if(empty($password_err) && empty($confirm_password_err)){
+        $email=$_SESSION["email"];
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        mysqli_query($link, "UPDATE users SET password='$password' WHERE email='$email'");
+        header('location: logout.php');
+    }
+}
+
 ?>
+
 <!DOCTYPE html> 
 <html lang="en">
     <head>
@@ -45,7 +82,6 @@ require_once "config.php";
                                     </div>
                                     <div class="card-body">
                                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                                        <input type="hidden" name="token" value="<?php echo $token; ?>">
                                             <div >
                                                 <div >
                                                     <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
@@ -66,9 +102,6 @@ require_once "config.php";
                                                 <input type="submit" value="Change Password" class="btn btn-primary btn-block">
                                             </div>
                                         </form>
-                                    </div>
-                                    <div class="card-footer text-center">
-                                        <div class="small"><a href="login.php">Have an account? Go to login</a></div>
                                     </div>
                                 </div>
                             </div>

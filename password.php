@@ -96,9 +96,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="card-footer text-center">
-                                        <div class="small"><a href="login.php">Have an account? Go to login</a></div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

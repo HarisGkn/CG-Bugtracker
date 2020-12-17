@@ -61,8 +61,7 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                         if($_SESSION["id"] == "1"){
                         ?>
                         <h1 class="mt-4">Dashboard</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">
+                            <div style="overflow-x:auto;" class="breadcrumb w-100">
                             <table class="table">
                                         <thead>
                                             <tr>
@@ -102,7 +101,7 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                               } 
                             ?>
                             </table>
-                        </ol>
+                            </div>
                         <a href="add_project.php" class="btn btn-primary">Add a Project</a>
                         <?php
                         }
