@@ -22,7 +22,7 @@ session_start();
                 <main>
                     <div class="container">
                         <div class="row justify-content-center">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5 w-100" style="overflow-x:auto;">
                                     <table class="table">
 
                                         <thead>
