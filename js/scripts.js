@@ -20,3 +20,11 @@
         $("body").toggleClass("sb-sidenav-toggled");
     });
 })(jQuery);
+
+function neFunc() {
+    var alerted = localStorage.getItem('alerted') || '';
+    if (alerted != 'yes') {
+    alert("This application was developed for training reasons and deployed as a portfolio project");
+    localStorage.setItem('alerted', 'yes');
+    }
+}
