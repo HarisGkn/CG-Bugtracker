@@ -16,7 +16,8 @@
         $description = $_POST['description'];
 
 		mysqli_query($link, "INSERT INTO tickets (proj_id, summary, status, to_user, priority, description) VALUES ('$proj_id', '$summary', '$status', '$to_user', '$priority', '$description')"); 
-		header('location: index.php');
+		header('location: list_tickets.php?inf='.$proj_id);
+		
 	}
 ?>
 
