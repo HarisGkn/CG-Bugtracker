@@ -46,12 +46,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             // προσπαθεια εκτελεσης του statement
             if(mysqli_stmt_execute($stmt)){
-                // $to = $email_rec;
-                // $subject = "Reset your password on CG-Bugtracker.com";
-                // $message = "Hi there, click on this <a href=\"/opt/lampp/htdocs/CG-Bugtracker/email_password_recovery.php/password.php?token=" . $token . "\">link</a> to reset your password on our site";
-                // $message = wordwrap($message,70);
-                // mail($to, $subject, $message);
-                // header('location: pending.php?email=' . $email_rec);
                 $mail = new PHPMailer();
                 $mail->IsSMTP();
                 $mail->Mailer = "smtp";

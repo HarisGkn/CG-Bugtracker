@@ -69,7 +69,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             
                             // Redirect user to index page
                             // στελνει τον χρηστη στην αρχικη
-                            header("location: index.php");
+                            // header("location: index.php");
                         } else{
                             // Display an error message if password is not valid
                             // αμα το password δεν ειναι σωστο εμφανιζει error
@@ -133,15 +133,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                                 <input class="form-control py-4" id="inputPassword" name="password" type="password" placeholder="Enter password" />
                                                 <span class="help-block"><?php echo $password_err; ?></span>
                                             </div>
-                                            <!-- <div class="form-group">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
-                                                    <label class="custom-control-label" for="rememberPasswordCheck">Remember password</label>
-                                                </div>
-                                            </div> -->
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="email_password_recovery.php">Forgot Password?</a>
-                                                <!-- <a class="btn btn-primary" href="index.php">Login</a> -->
                                                 <input type="submit" class="btn btn-primary" value="Login">
                                             </div>
                                         </form>

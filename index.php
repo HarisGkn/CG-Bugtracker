@@ -158,7 +158,7 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                 </div>
                 
                 </main>
-                <footer class="py-4 bg-light mt-auto footer">
+                <!-- <footer class="py-4 bg-light mt-auto footer">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; Your Website 2020</div>
@@ -169,7 +169,7 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                             </div>
                         </div>
                     </div>
-                </footer>
+                </footer> -->
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
