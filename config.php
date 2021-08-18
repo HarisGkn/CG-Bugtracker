@@ -1,8 +1,8 @@
 <?php
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'CG-BUGTRACKER');
+define('DB_SERVER', 'remotemysql.com');
+define('DB_USERNAME', 'XC2QsFQrD3');
+define('DB_PASSWORD', 'qhYN3EeVE1');
+define('DB_NAME', 'XC2QsFQrD3');
  
 /* Attempt to connect to MySQL database */
 // αποπειρα συνδεσης στη βαση
