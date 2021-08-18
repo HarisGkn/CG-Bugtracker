@@ -2,9 +2,9 @@
 session_start();
 // Include config file
 require_once "config.php";
-if($_SESSION["id"] != "1"){
-    header("Location: index.php");
-}
+// if($_SESSION["id"] != "1"){
+//     header("Location: index.php");
+// }
 	// initialize variables
     $status = "";
     $authorized_users = "";
