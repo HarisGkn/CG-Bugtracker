@@ -58,7 +58,7 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                         <br>
                         <br>
                         <?php
-                        if($_SESSION["id"] == "1"){
+                        // if($_SESSION["id"] == "1"){
                         ?>
                         <h1 class="mt-4">Dashboard</h1>
                             <div style="overflow-x:auto;" class="breadcrumb w-100">
@@ -105,8 +105,8 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                             </div>
                         
                         <?php
-                        }
-                        else{
+                        // }
+                        // else{
                             ?>
                             <h1 class="mt-4">Dashboard</h1>
                         <ol class="breadcrumb mb-4">
@@ -151,7 +151,7 @@ if(!isset($_SESSION['loggedin'])){ //if login in session is not set
                             </table>
                         </ol>
                             <?php
-                        }
+                        // }
                         ?>
                         </div>
                     </div>
