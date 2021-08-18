@@ -5,7 +5,7 @@ session_start();
 // Check if the user is already logged in, if yes then redirect him to index page
 // αν ο χρηστης ειναι ηδη συνδεδεμενος τον στελνει στην index
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: index.php");
+    header("location: /");
     exit;
 }
 
