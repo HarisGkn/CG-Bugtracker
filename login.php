@@ -4,10 +4,10 @@ session_start();
  
 // Check if the user is already logged in, if yes then redirect him to index page
 // αν ο χρηστης ειναι ηδη συνδεδεμενος τον στελνει στην index
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: index.php");
-    exit;
-}
+// if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+//     header("location: index.php");
+//     exit;
+// }
 
 // Include config file
 require_once "config.php";
@@ -69,7 +69,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             
                             // Redirect user to index page
                             // στελνει τον χρηστη στην αρχικη
-                            // header("location: index.php");
+                            header("location: index.php");
                         } else{
                             // Display an error message if password is not valid
                             // αμα το password δεν ειναι σωστο εμφανιζει error
